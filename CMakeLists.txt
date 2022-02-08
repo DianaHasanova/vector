@@ -3,4 +3,7 @@ project(vectors C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(vectors main.c)
+add_executable(vectors main.c libs/data_structures/vector/vector.c libs/data_structures/vector/vector.h)
+
+add_subdirectory(libs)
+target_link_libraries(vectors data_structures)
