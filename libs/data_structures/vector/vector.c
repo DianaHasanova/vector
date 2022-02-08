@@ -15,12 +15,12 @@ vector createVector(size_t n) {
 }
 
 void reserve(vector *v, size_t newCapacity) {
-
+    v->data = (int *) calloc(v->data, sizeof(int) * newCapacity);
 }
 
 //3
 void clear(vector *v) {
-
+    free(v->data);
 }
 
 //4
