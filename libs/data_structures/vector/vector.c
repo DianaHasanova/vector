@@ -20,12 +20,13 @@ void reserve(vector *v, size_t newCapacity) {
 
 //3
 void clear(vector *v) {
-    free(v->data);
+    v->size = 0;
 }
 
 //4
 void shrinkToFit(vector *v) {
-
+    v->data = (int *) realloc(v->data, sizeof(int) * v->size);
+    v->capacity = v->size;
 }
 
 //5
