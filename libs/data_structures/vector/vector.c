@@ -4,13 +4,14 @@
 #include <stdlib.h>
 
 vector createVector(size_t n) {
-    int *data = NULL;
-    if (n)
-        data = (int *) malloc(n * sizeof(int));
-    if (data == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    int *data = (int *) malloc(n * sizeof(int));
+    if (n) {
+        if (data == NULL) {
+            fprintf(stderr, "bad alloc");
+            exit(1);
+        }
+    } else
+        data = NULL;
     return (vector) {data, 0, n};
 }
 
@@ -18,7 +19,7 @@ void reserve(vector *v, size_t newCapacity) {
     if (newCapacity == 0)
         v->data = NULL;
     else
-        v->data = (int *) calloc(v->data, sizeof(int) * newCapacity);
+        v->data = (int *) realloc(v->data, sizeof(int) * newCapacity);
     v->capacity = newCapacity;
 }
 
@@ -35,44 +36,46 @@ void deleteVector(vector *v) {
 }
 
 bool isEmpty(vector *v) {
-    return v->size == 0 ? true : false;
+    return v->size == 0;
 }
 
 bool isFull(vector *v) {
-    return v->size == v->capacity ? true : false;
+    return v->size == v->capacity;
 }
 
 void pushBack(vector *v, int x) {
-    if (v->capacity==0) {
-        reserve(v,1);
-        v->capacity=1;
-    } else if (v->size==v->capacity) {
-        reserve(v,v->capacity*2);
-        v->capacity*=2;
-        v->size++;
+    if (v->capacity == 0) {
+        reserve(v, 1);
+        v->capacity = 1;
+    } else if (v->size == v->capacity) {
+        reserve(v, v->capacity * 2);
+        v->capacity *= 2;
     }
-    v->data[v->size++]=x;
+    v->data[v->size++] = x;
 }
 
 //7
 void popBack(vector *v) {
-if (isEmpty(v))
-    exit(1);
-v->size--;
+    if (isEmpty(v))
+        exit(1);
+    v->size--;
 }
 
 
 int *atVector(vector *v, size_t index) {
-
-
+    if (index >= v->size) {
+        fprintf(stderr, "IndexError: a[index] is not exists");
+        exit(1);
+    }
+    return &v->data[index];
 }
 
 //9
 int *back(vector *v) {
-
+    return atVector(v, v->size - 1);
 }
 
 //10
 int *front(vector *v) {
-
+    return atVector(v, 0);
 }

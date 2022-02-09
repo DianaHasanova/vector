@@ -10,40 +10,40 @@ typedef struct vector {
     size_t capacity;
 } vector;
 
-//1
+//возвращает структуру-дескриптор векторов из n значений
 vector createVector(size_t n);
 
-//2
+//изменяет количество памяти, выделенное под хранение элементов вектора
 void reserve(vector *v, size_t newCapacity);
 
-//3
+//удаляет элементы из контейнера, но не освобождает выделенную память
 void clear(vector *v);
 
-//4
+//освобождает память, выделенную под неиспользованные элементы
 void shrinkToFit(vector *v);
 
-//5
+//освобождает память, выделенную вектору
 void deleteVector(vector *v);
 
-//6
+//возвращает true, если вектор v пустой,иначе false
 bool isEmpty(vector *v);
 
-//7
+//возвращает true, если вектор v полный,иначе false
 bool isFull(vector *v);
 
-//6
+//добавляет элемент x в конец вектора v
 void pushBack(vector *v, int x);
 
-//7
+//удаляет последний элемент из вектора v
 void popBack(vector *v);
 
-//8
+//возвращает указатель на index-ый элемент массива
 int *atVector(vector *v, size_t index);
 
-//9
+//возвращает указатель на последний элемент массива
 int *back(vector *v);
 
-//10
+//возвращает указатель на нулевой элемент массива
 int *front(vector *v);
 
 #endif //VECTORS_VECTOR_H
