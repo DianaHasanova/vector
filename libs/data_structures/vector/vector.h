@@ -2,6 +2,7 @@
 #define VECTORS_VECTOR_H
 
 #include <malloc.h>
+#include <stdbool.h>
 
 typedef struct vector {
     int *data;
@@ -23,6 +24,12 @@ void shrinkToFit(vector *v);
 
 //5
 void deleteVector(vector *v);
+
+//6
+bool isEmpty(vector *v);
+
+//7
+bool isFull(vector *v);
 
 //6
 void pushBack(vector *v, int x);

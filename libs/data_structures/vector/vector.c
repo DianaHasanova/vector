@@ -15,37 +15,55 @@ vector createVector(size_t n) {
 }
 
 void reserve(vector *v, size_t newCapacity) {
-    v->data = (int *) calloc(v->data, sizeof(int) * newCapacity);
+    if (newCapacity == 0)
+        v->data = NULL;
+    else
+        v->data = (int *) calloc(v->data, sizeof(int) * newCapacity);
+    v->capacity = newCapacity;
 }
 
-//3
 void clear(vector *v) {
     v->size = 0;
 }
 
-//4
 void shrinkToFit(vector *v) {
-    v->data = (int *) realloc(v->data, sizeof(int) * v->size);
     v->capacity = v->size;
 }
 
-//5
 void deleteVector(vector *v) {
-
+    free(v->data);
 }
 
-//6
-void pushBack(vector *v, int x) {
+bool isEmpty(vector *v) {
+    return v->size == 0 ? true : false;
+}
 
+bool isFull(vector *v) {
+    return v->size == v->capacity ? true : false;
+}
+
+void pushBack(vector *v, int x) {
+    if (v->capacity==0) {
+        reserve(v,1);
+        v->capacity=1;
+    } else if (v->size==v->capacity) {
+        reserve(v,v->capacity*2);
+        v->capacity*=2;
+        v->size++;
+    }
+    v->data[v->size++]=x;
 }
 
 //7
 void popBack(vector *v) {
-
+if (isEmpty(v))
+    exit(1);
+v->size--;
 }
 
-//8
+
 int *atVector(vector *v, size_t index) {
+
 
 }
 
