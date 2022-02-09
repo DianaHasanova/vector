@@ -33,6 +33,7 @@ void shrinkToFit(vector *v) {
 
 void deleteVector(vector *v) {
     free(v->data);
+    reserve(v, 0);
 }
 
 bool isEmpty(vector *v) {
@@ -44,17 +45,13 @@ bool isFull(vector *v) {
 }
 
 void pushBack(vector *v, int x) {
-    if (v->capacity == 0) {
+    if (v->capacity == 0)
         reserve(v, 1);
-        v->capacity = 1;
-    } else if (v->size == v->capacity) {
+    else if (v->size == v->capacity)
         reserve(v, v->capacity * 2);
-        v->capacity *= 2;
-    }
     v->data[v->size++] = x;
 }
 
-//7
 void popBack(vector *v) {
     if (isEmpty(v))
         exit(1);
@@ -70,12 +67,10 @@ int *atVector(vector *v, size_t index) {
     return &v->data[index];
 }
 
-//9
 int *back(vector *v) {
     return atVector(v, v->size - 1);
 }
 
-//10
 int *front(vector *v) {
     return atVector(v, 0);
 }
